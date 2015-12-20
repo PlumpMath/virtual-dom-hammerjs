@@ -13,7 +13,7 @@
     "hammer.js",
     "hammerjs"
   ],
-  "author": "Daniel Naab",
+  "author": "Daniel Naab <dan@crushingpennies.com>",
   "license": "MIT",
   "devDependencies": {
     "ecstatic": "^1.3.1",
