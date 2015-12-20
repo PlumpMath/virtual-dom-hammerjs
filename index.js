@@ -1,6 +1,6 @@
 'use strict';
 
-var Hammer = require('hammerjs')
+var Hammer = typeof window === 'undefined' ? undefined : require('hammerjs')
 
 
 var handlerToEvent = {
