@@ -64,7 +64,7 @@ hg.app(document.body, appState, function (state) {
                 manager: {
                     touchAction: 'compute',
                     recognizers: {
-                        // Custom recognizer:
+                        // Custom recognizers:
                         tripletap: {
                             type: 'Tap',
                             options: {
@@ -72,11 +72,24 @@ hg.app(document.body, appState, function (state) {
                             },
                             recognizeWith: ['tap']
                         },
+                        panh: {
+                            type: 'Pan',
+                            options: {
+                                direction: Hammer.DIRECTION_HORIZONTAL
+                            }
+                        },
+                        panv: {
+                            type: 'Pan',
+                            options: {
+                                direction: Hammer.DIRECTION_VERTICAL
+                            },
+                            requireFailure: ['panh']
+                        },
 
                         // The following recognizers update the default ones:
                         pan: {
                             options: {
-                                enable: false
+                                enable: true
                             }
                         },
                         pinch: {

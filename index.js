@@ -38,6 +38,12 @@ HammerWidget.prototype.hook = function (node) {
                             recognizer.recognizeWith(recWith)
                         })
                     }
+                    if (gesture.requireFailure) {
+                        gesture.requireFailure.forEach(function (rf) {
+                            var recObj = this.hammer.get(rf)
+                            recognizer.requireFailure(recObj)
+                        }, this)
+                    }
                 }, this)
             } else {
                 var key = option

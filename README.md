@@ -1,8 +1,10 @@
 # virtual-dom-hammerjs
 
 A simple [virtual-dom widget](https://github.com/Matt-Esch/virtual-dom/blob/master/docs/widget.md)
-that wraps [hammer.js](http://hammerjs.github.io/) events to the virtual-dom.
-The general idea comes from [react-hammerjs](https://github.com/JedWatson/react-hammerjs).
+that wraps [Hammer.js](http://hammerjs.github.io/) events to the virtual-dom.
+The general idea comes from [react-hammerjs](https://github.com/JedWatson/react-hammerjs),
+but this implementation supports all events and the complete
+[Hammer.js](http://hammerjs.github.io/) feature set with a declarative api.
 
 ## Usage
 
@@ -11,9 +13,6 @@ properties will be merged with the default ones.
 
 In addition, the actual `Hammer.js` object is exposed as `Hammer.OPTS`, from
 which one may access constants.
-
-[`requireFailure`](http://hammerjs.github.io/require-failure/) is not
-supported.
 
 ```javascript
 var Hammer = require('virtual-dom-hammerjs')
