@@ -29,6 +29,8 @@ hg.app(document.body, appState, function (state) {
             },
             hammer: new Hammer({
                 events: {
+                    tripletap: handleEvent,
+
                     pan: handleEvent,
                     panstart: handleEvent,
                     panmove: handleEvent,
@@ -62,11 +64,20 @@ hg.app(document.body, appState, function (state) {
                 manager: {
                     touchAction: 'compute',
                     recognizers: {
+                        // Custom recognizer:
+                        tripletap: {
+                            type: 'Tap',
+                            options: {
+                                taps: 3
+                            },
+                            recognizeWith: ['tap']
+                        },
+
+                        // The following recognizers update the default ones:
                         pan: {
                             options: {
                                 enable: false
-                            },
-                            recognizeWith: ['swipe']
+                            }
                         },
                         pinch: {
                             options: {
@@ -74,7 +85,6 @@ hg.app(document.body, appState, function (state) {
                             },
                             recognizeWith: ['rotate']
                         },
-                        press: {},
                         rotate: {
                             options: {
                                 enable: true
@@ -92,6 +102,7 @@ hg.app(document.body, appState, function (state) {
                         },
                         tap: {
                             options: {
+                                enable: false,
                                 time: 600,
                                 threshold: 100
                             }
