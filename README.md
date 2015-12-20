@@ -6,13 +6,14 @@ The general idea comes from [react-hammerjs](https://github.com/JedWatson/react-
 
 ## Usage
 
-The options property may be used to configure the Hammer manager. These
+The `manager` property may be used to configure the Hammer manager. These
 properties will be merged with the default ones.
 
-With `vertical: true`, the pan and swipe events will support vertical gestures.
+In addition, the actual `Hammer.js` object is exposed as `Hammer.OPTS`, from
+which one may access constants.
 
-The action handler behaves like the onTap event handler, but will also be fired
-onPress.
+[`requireFailure`](http://hammerjs.github.io/require-failure/) is not
+supported.
 
 ```javascript
 var Hammer = require('virtual-dom-hammerjs')
@@ -22,29 +23,74 @@ var h = require('virtual-dom/h')
 function render(count)  {
     return h('div', {
         hammer: new Hammer({
-            action: 'tap press',
-            onTap: 'tap',
-            onDoubleTap: 'doubletap',
-            onPanStart: 'panstart',
-            onPan: 'pan',
-            onPanEnd: 'panend',
-            onPanCancel: 'pancancel',
-            onSwipe: 'swipe',
-            onPress: 'press',
-            onPressUp: 'pressup',
-            onPinch: 'pinch',
-            onPinchIn: 'pinchin',
-            onPinchOut: 'pinchout',
-            onPinchStart: 'pinchstart',
-            onPinchEnd: 'pinchend',
-            onRotate: 'rotate'
+            events: {
+                pan: handleEvent,
+                panstart: handleEvent,
+                panmove: handleEvent,
+                panend: handleEvent,
+                pancancel: handleEvent,
+                panleft: handleEvent,
+                panright: handleEvent,
+                panup: handleEvent,
+                pandown: handleEvent,
+                pinch: handleEvent,
+                pinchstart: handleEvent,
+                pinchmove: handleEvent,
+                pinchend: handleEvent,
+                pinchcancel: handleEvent,
+                pinchin: handleEvent,
+                pinchout: handleEvent,
+                press: handleEvent,
+                pressup: handleEvent,
+                rotate: handleEvent,
+                rotatestart: handleEvent,
+                rotatemove: handleEvent,
+                rotateend: handleEvent,
+                rotatecancel: handleEvent,
+                swipe: handleEvent,
+                swipeleft: handleEvent,
+                swiperight: handleEvent,
+                swipeup: handleEvent,
+                swipedown: handleEvent,
+                tap: handleEvent
+            },
             vertical: true,
-            options: {
-                touchAction: true,
+            manager: {
+                touchAction: 'compute',
                 recognizers: {
+                    pan: {
+                        options: {
+                            enable: false
+                        },
+                        recognizeWith: ['swipe']
+                    },
+                    pinch: {
+                        options: {
+                            enable: true
+                        },
+                        recognizeWith: ['rotate']
+                    },
+                    press: {},
+                    rotate: {
+                        options: {
+                            enable: true
+                        }
+                    },
+                    swipe: {
+                        options: {
+                            enable: true,
+                            pointers: 1,
+                            threshold: 10,
+                            direction: Hammer.OPTS.DIRECTION_ALL,
+                            velocity: 0.65
+                        },
+                        recognizeWith: ['pan']
+                    },
                     tap: {
-                        time: 600,
-                        threshold: 100
+                        options: {
+                            time: 600,
+                            threshold: 100
+                        }
                     }
                 }
             }

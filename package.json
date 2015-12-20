@@ -1,6 +1,6 @@
 {
   "name": "virtual-dom-hammerjs",
-  "version": "0.0.4",
+  "version": "1.0.0",
   "description": "A virtual-dom widget that enables interop with hammer.js.",
   "main": "index.js",
   "repository": "git://github.com/danielnaab/virtual-dom-hammerjs",

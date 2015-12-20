@@ -3,63 +3,42 @@
 var Hammer = typeof window === 'undefined' ? undefined : require('hammerjs')
 
 
-var handlerToEvent = {
-    action: 'tap press',
-    onTap: 'tap',
-    onDoubleTap: 'doubletap',
-    onPanStart: 'panstart',
-    onPan: 'pan',
-    onPanEnd: 'panend',
-    onPanCancel: 'pancancel',
-    onSwipe: 'swipe',
-    onPress: 'press',
-    onPressUp: 'pressup',
-    onPinch: 'pinch',
-    onPinchIn: 'pinchin',
-    onPinchOut: 'pinchout',
-    onPinchStart: 'pinchstart',
-    onPinchEnd: 'pinchend',
-    onRotate: 'rotate'
-}
-
-
 function HammerWidget(options) {
     this.options = options
 }
 
 
+HammerWidget.OPTS = Hammer
+
+
 HammerWidget.prototype.hook = function (node) {
     this.hammer = new Hammer(node)
-    if (this.options.vertical) {
-        this.hammer.get('pan').set({direction: Hammer.DIRECTION_ALL})
-        this.hammer.get('swipe').set({direction: Hammer.DIRECTION_ALL})
-    } else {
-        this.hammer.get('pan').set({direction: Hammer.DIRECTION_HORIZONTAL})
-        this.hammer.get('swipe').set({direction: Hammer.DIRECTION_HORIZONTAL})
-    }
 
-    if (this.options.options) {
-        Object.keys(this.options.options).forEach(function (option) {
+    if (this.options.manager) {
+        Object.keys(this.options.manager).forEach(function (option) {
             if (option === 'recognizers') {
-                Object.keys(this.options.options.recognizers).forEach(function (gesture) {
-                    var recognizer = this.hammer.get(gesture)
-                    recognizer.set(this.options.options.recognizers[gesture])
+                Object.keys(this.options.manager.recognizers).forEach(function (name) {
+                    var recognizer = this.hammer.get(name)
+                    var gesture = this.options.manager.recognizers[name]
+                    recognizer.set(gesture.options || {});
+                    if (gesture.recognizeWith) {
+                        gesture.recognizeWith.forEach(function (recWith) {
+                            recognizer.recognizeWith(recWith)
+                        })
+                    }
                 }, this)
             } else {
                 var key = option
                 var optionObj = {}
-                optionObj[key] = this.options.options[option]
+                optionObj[key] = this.options.manager[option]
                 this.hammer.set(optionObj)
             }
         }, this)
     }
 
-    Object.keys(this.options).forEach(function (p) {
-        var e = handlerToEvent[p]
-        if (e) {
-            this.hammer.off(e)
-            this.hammer.on(e, this.options[p])
-        }
+    Object.keys(this.options.events).forEach(function (name) {
+        this.hammer.off(name)
+        this.hammer.on(name, this.options.events[name])
     }, this)
 }
 
