@@ -75,13 +75,13 @@ hg.app(document.body, appState, function (state) {
                         panh: {
                             type: 'Pan',
                             options: {
-                                direction: Hammer.DIRECTION_HORIZONTAL
+                                direction: Hammer.OPTS.DIRECTION_HORIZONTAL
                             }
                         },
                         panv: {
                             type: 'Pan',
                             options: {
-                                direction: Hammer.DIRECTION_VERTICAL
+                                direction: Hammer.OPTS.DIRECTION_VERTICAL
                             },
                             requireFailure: ['panh']
                         },
