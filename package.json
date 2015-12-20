@@ -1,0 +1,27 @@
+{
+  "name": "virtual-dom-hammerjs",
+  "version": "0.0.1",
+  "description": "A virtual-dom widget that enables interop with hammer.js.",
+  "main": "index.js",
+  "scripts": {
+    "watch": "(rm -rf dist && mkdir dist && cp test/index.html dist && ecstatic -p 9000 dist) & npm run watch:js",
+    "watch:js": "watchify test/index.js -o dist/index.js -dv"
+  },
+  "keywords": [
+    "virtual-dom",
+    "hammer.js",
+    "hammerjs"
+  ],
+  "author": "Daniel Naab",
+  "license": "Public Domain",
+  "devDependencies": {
+    "ecstatic": "^1.3.1",
+    "global": "^4.3.0",
+    "mercury": "^14.0.0",
+    "touch-emulator": "^1.0.0",
+    "watchify": "^3.6.1"
+  },
+  "dependencies": {
+    "hammerjs": "^2.0.4"
+  }
+}
