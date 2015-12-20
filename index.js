@@ -10,12 +10,15 @@ var handlerToEvent = {
     onPanStart: 'panstart',
     onPan: 'pan',
     onPanEnd: 'panend',
+    onPanCancel: 'pancancel',
     onSwipe: 'swipe',
     onPress: 'press',
     onPressUp: 'pressup',
     onPinch: 'pinch',
     onPinchIn: 'pinchin',
     onPinchOut: 'pinchout',
+    onPinchStart: 'pinchstart',
+    onPinchEnd: 'pinchend',
     onRotate: 'rotate'
 }
 
