@@ -47,6 +47,7 @@ function render(count)  {
                         threshold: 100
                     }
                 }
+            }
         })
     }, 'Touch Me')
 }
