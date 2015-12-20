@@ -54,7 +54,6 @@ function render(count)  {
                 swipedown: handleEvent,
                 tap: handleEvent
             },
-            vertical: true,
             manager: {
                 touchAction: 'compute',
                 recognizers: {

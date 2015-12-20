@@ -59,7 +59,6 @@ hg.app(document.body, appState, function (state) {
                     swipedown: handleEvent,
                     tap: handleEvent
                 },
-                vertical: true,
                 manager: {
                     touchAction: 'compute',
                     recognizers: {
