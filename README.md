@@ -23,6 +23,8 @@ function render(count)  {
     return h('div', {
         hammer: new Hammer({
             events: {
+                tripletap: handleEvent,
+
                 pan: handleEvent,
                 panstart: handleEvent,
                 panmove: handleEvent,
@@ -56,11 +58,33 @@ function render(count)  {
             manager: {
                 touchAction: 'compute',
                 recognizers: {
+                    // Custom recognizers:
+                    tripletap: {
+                        type: 'Tap',
+                        options: {
+                            taps: 3
+                        },
+                        recognizeWith: ['tap']
+                    },
+                    panh: {
+                        type: 'Pan',
+                        options: {
+                            direction: Hammer.DIRECTION_HORIZONTAL
+                        }
+                    },
+                    panv: {
+                        type: 'Pan',
+                        options: {
+                            direction: Hammer.DIRECTION_VERTICAL
+                        },
+                        requireFailure: ['panh']
+                    },
+
+                    // The following recognizers update the default ones:
                     pan: {
                         options: {
-                            enable: false
-                        },
-                        recognizeWith: ['swipe']
+                            enable: true
+                        }
                     },
                     pinch: {
                         options: {
@@ -68,7 +92,6 @@ function render(count)  {
                         },
                         recognizeWith: ['rotate']
                     },
-                    press: {},
                     rotate: {
                         options: {
                             enable: true
@@ -86,6 +109,7 @@ function render(count)  {
                     },
                     tap: {
                         options: {
+                            enable: false,
                             time: 600,
                             threshold: 100
                         }
