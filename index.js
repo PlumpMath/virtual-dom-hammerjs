@@ -3,15 +3,15 @@
 var Hammer = typeof window === 'undefined' ? undefined : require('hammerjs')
 
 
-function HammerWidget(options) {
+function HammerHook(options) {
     this.options = options
 }
 
 
-HammerWidget.OPTS = Hammer
+HammerHook.OPTS = Hammer
 
 
-HammerWidget.prototype.hook = function (node) {
+HammerHook.prototype.hook = function (node, propertyName, previousValue) {
     this.hammer = new Hammer(node)
     this.taps = {}
 
@@ -61,10 +61,10 @@ HammerWidget.prototype.hook = function (node) {
 }
 
 
-HammerWidget.prototype.unhook = function (node) {
+HammerHook.prototype.unhook = function (node) {
     this.hammer.stop()
     this.hammer.destroy()
 }
 
 
-module.exports = HammerWidget
+module.exports = HammerHook

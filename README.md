@@ -1,6 +1,6 @@
 # virtual-dom-hammerjs
 
-A simple [virtual-dom widget](https://github.com/Matt-Esch/virtual-dom/blob/master/docs/widget.md)
+A simple [virtual-dom hook](https://github.com/Matt-Esch/virtual-dom/blob/master/docs/hooks.md)
 that wraps [Hammer.js](http://hammerjs.github.io/) events to the virtual-dom.
 The general idea comes from [react-hammerjs](https://github.com/JedWatson/react-hammerjs),
 but this implementation supports all events and the complete
